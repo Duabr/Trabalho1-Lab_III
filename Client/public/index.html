@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Bases Numéricas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        /* Mesma origem: API via proxy em server.js (Client). Para outro arranjo, defina a URL base da API. */
+        window.__API_BASE__ = '';
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Conversor de Bases</h1>
+        <p>Laboratório de Programação III — Ciência da Computação</p>
+
+        <nav class="tabs" role="tablist" aria-label="Seções">
+            <button type="button" class="tab-btn active" data-section="conversoes" role="tab" aria-selected="true">Conversões</button>
+            <button type="button" class="tab-btn" data-section="usuarios" role="tab" aria-selected="false">Usuários</button>
+        </nav>
+
+        <div id="globalBanner" class="hidden" role="status"></div>
+
+        <section id="panel-conversoes" class="section-panel active" role="tabpanel">
+            <div class="card">
+                <h2>Nova conversão</h2>
+                <form id="formConversao" class="inline-form">
+                    <div class="input-group">
+                        <label for="userIdSelect">Usuário</label>
+                        <select id="userIdSelect" required aria-describedby="hintUser">
+                            <option value="">Carregando…</option>
+                        </select>
+                        <span id="hintUser" class="small">Selecione um usuário cadastrado (aba Usuários).</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="numberInput">Valor de entrada</label>
+                        <input type="text" id="numberInput" class="mono" placeholder="Ex.: 1010, FF, 42" autocomplete="off" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="baseOrigem">Base de origem</label>
+                        <select id="baseOrigem" class="mono"></select>
+                    </div>
+                    <div class="input-group">
+                        <label for="baseDestino">Base de destino</label>
+                        <select id="baseDestino" class="mono"></select>
+                    </div>
+                    <button type="submit" class="primary" id="btnConverter">Converter</button>
+                </form>
+            </div>
+
+            <div id="resultadoContainer" class="card hidden">
+                <h3>Resultado</h3>
+                <p id="resultadoTexto" class="mono"></p>
+            </div>
+
+            <div class="card">
+                <div class="flex-between">
+                    <h3>Histórico</h3>
+                    <div>
+                        <label class="small" for="filtroHistoricoUser">Filtrar por usuário</label>
+                        <select id="filtroHistoricoUser" class="mono">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="historicoErro" class="error-message hidden"></div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuário</th>
+                                <th>Entrada</th>
+                                <th>Bases</th>
+                                <th>Resultado</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="historicoBody">
+                        </tbody>
+                    </table>
+                </div>
+                <p id="historicoEmpty" class="empty-state hidden">Nenhum registro ainda.</p>
+            </div>
+        </section>
+
+        <section id="panel-usuarios" class="section-panel" role="tabpanel">
+            <div class="card">
+                <h2 id="formUsuarioTitulo">Novo usuário</h2>
+                <form id="formUsuario" class="inline-form">
+                    <input type="hidden" id="editUserId" value="">
+                    <div class="input-group">
+                        <label for="userName">Nome</label>
+                        <input type="text" id="userName" required maxlength="120" autocomplete="name">
+                    </div>
+                    <div class="input-group">
+                        <label for="userEmail">E-mail</label>
+                        <input type="email" id="userEmail" required maxlength="180" autocomplete="email">
+                    </div>
+                    <button type="submit" class="primary" id="btnSalvarUsuario">Salvar</button>
+                    <button type="button" class="ghost hidden" id="btnCancelarEdicao">Cancelar edição</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>Lista de usuários</h3>
+                <div id="listaUsuariosErro" class="error-message hidden"></div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaUsuariosBody">
+                        </tbody>
+                    </table>
+                </div>
+                <p id="listaUsuariosEmpty" class="empty-state hidden">Nenhum usuário cadastrado.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/api.js" defer></script>
+    <script src="js/users.js" defer></script>
+    <script src="js/conversions.js" defer></script>
+    <script src="js/app.js" defer></script>
+</body>
+</html>
