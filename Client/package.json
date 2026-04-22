@@ -2,8 +2,10 @@
   "name": "trabalho1-lab_iii",
   "version": "1.0.0",
   "description": "Ainda não sei o que colocar aqui :P",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +20,7 @@
   },
   "homepage": "https://github.com/Duabr/Trabalho1-Lab_III#readme",
   "dependencies": {
-    "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "http-proxy-middleware": "^3.0.3"
   }
 }
